@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default refresh rate in the zone defined by brightness and ambient thresholds.
+         If non-positive, then the refresh rate is unchanged even if thresholds are configured. -->
+    <!-- Forcing 60 Hz on the Pixel 4 XL avoids the 90 Hz green tint at low brightness. -->
+    <integer name="config_defaultRefreshRateInZone">60</integer>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The display uses different gamma curves for different refresh rates. It's hard for panel
+         vendor to tune the curves to have exact same brightness for different refresh rate. So
+         flicker could be observed at switch time. The issue is worse at the gamma lower end.
+         In addition, human eyes are more sensitive to the flicker at darker environment.
+         To prevent flicker, we only support higher refresh rates if the display brightness is above
+         a threshold. And the darker environment could have higher threshold.
+         For example, no higher refresh rate if
+             display brightness <= disp0 && ambient brightness <= amb0
+             || display brightness <= disp1 && ambient brightness <= amb1 -->
+    <integer-array translatable="false" name="config_brightnessThresholdsOfPeakRefreshRate">
+        <!-- Pixel 4 XL exhibits a noticeable green tint at 2-ish or lower brightness, having to
+             round up to 3 since the integer value of the floating point representation isn't an
+             exact conversion.
+             Note: on Android 10, the brightness thresholds were 13% = green tint, 15% = fine.
+             Android 11 changed the displayed brightness percentage.  This does not impact the
+             integer value gotten from the ADB settings command.
+             To get the brightness in integer from the UI percentage, use
+             adb shell settings get system screen_brightness -->
+        <item>3</item>
+    </integer-array>
+    <integer-array translatable="false" name="config_ambientThresholdsOfPeakRefreshRate">
+        <!-- At no point is the green tint acceptable.  For more thresholds, see
+             https://en.wikipedia.org/wiki/Daylight#Intensity_in_different_conditions -->
+        <item>20000</item>
+    </integer-array>
+</resources>
